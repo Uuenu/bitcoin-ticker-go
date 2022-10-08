@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -29,19 +28,26 @@ func getMethods(c *gin.Context) {
 func postMethods(c *gin.Context) {
 	method := c.Query("method")
 	if method == "convert" {
-		cf, ct, val := c.Query("convert_from"), c.Query("convert_to"), c.Query("value")
-		fmt.Println(cf, ct, val)
+		params := c.Request.URL.Query()
 		var convert models.Convert
-		valf, _ := strconv.ParseFloat(val, 32)
-		convert.SetConvert(cf, ct, valf)
-		convert.GetConvert()
-		c.JSON(http.StatusOK, gin.H{
-			"convert_from":    convert.CurrencyFrom,
-			"convert_to":      convert.CurrencyTo,
-			"value":           convert.Value,
-			"converted_value": convert.ConvertedValue,
-			"rate":            convert.Rate,
-		})
+		if !convert.CheckConvertParams(params) {
+			c.JSON(http.StatusOK, gin.H{
+				"response": "Incorrect params",
+			})
+		} else {
+			cf, ct, val := c.Query("convert_from"), c.Query("convert_to"), c.Query("value")
+			valf, _ := strconv.ParseFloat(val, 32)
+			convert.SetConvert(cf, ct, valf)
+			convert.GetConvert()
+			c.JSON(http.StatusOK, gin.H{
+				"convert_from":    convert.CurrencyFrom,
+				"convert_to":      convert.CurrencyTo,
+				"value":           convert.Value,
+				"converted_value": convert.ConvertedValue,
+				"rate":            convert.Rate,
+			})
+		}
+
 	}
 }
 

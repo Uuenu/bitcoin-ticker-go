@@ -42,7 +42,7 @@ func (ticker *Ticker) SetTicker() {
 		sellf, _ := strconv.ParseFloat(sell, 32)
 		btcPrice := BitcoinPrice{currency: string(key), price: sellf}
 		ticker.BitcoinPriceList[string(key)] = btcPrice
-		fmt.Println(string(key), " ", ticker.BitcoinPriceList[string(key)])
+		//fmt.Println(string(key), " ", ticker.BitcoinPriceList[string(key)])
 	}
 
 }
