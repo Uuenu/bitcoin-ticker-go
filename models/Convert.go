@@ -1,6 +1,7 @@
 package models
 
 type Convert struct {
+	Request        Request
 	Ticker         Ticker
 	CurrencyFrom   string
 	CurrencyTo     string
@@ -48,13 +49,13 @@ func (c *Convert) GetConvert() {
 	switch c.CurrencyFrom {
 	case "BTC":
 		{
-			c.ConvertedValue = c.Value * c.Ticker.BitcoinPriceList[c.CurrencyTo].price
+			c.ConvertedValue = c.Value * c.Ticker.BitcoinPriceList[c.CurrencyTo]
 			c.Rate = 1
 		}
 
 	default:
 		{
-			c.ConvertedValue = c.Value / c.Ticker.BitcoinPriceList[c.CurrencyFrom].price
+			c.ConvertedValue = c.Value / c.Ticker.BitcoinPriceList[c.CurrencyFrom]
 			c.Rate = 1
 		}
 	}

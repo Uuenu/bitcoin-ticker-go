@@ -1,7 +1,8 @@
 package main
 
 import (
-	"encoding/json"
+	//"encoding/json"
+
 	"net/http"
 	"strconv"
 
@@ -15,13 +16,15 @@ func getMethods(c *gin.Context) {
 	method := c.Query("method")
 
 	if method == "rates" {
-		var ticker models.Ticker
-		ticker.SetTicker()
-		jsonString, err := json.Marshal(ticker.BitcoinPriceList)
-		if err != nil {
-			panic(err)
+		params := c.Request.URL.Query()
+		var rates models.Rates
+		if rates.CheckRatesParams(params) {
+			c.JSON(http.StatusOK, rates.GetRates(params))
+		} else {
+			c.JSON(http.StatusOK, gin.H{
+				"response": "Incorrect params",
+			})
 		}
-		c.JSON(http.StatusOK, jsonString)
 	}
 }
 
@@ -35,9 +38,8 @@ func postMethods(c *gin.Context) {
 				"response": "Incorrect params",
 			})
 		} else {
-			cf, ct, val := c.Query("convert_from"), c.Query("convert_to"), c.Query("value")
-			valf, _ := strconv.ParseFloat(val, 32)
-			convert.SetConvert(cf, ct, valf)
+			value, _ := strconv.ParseFloat(params["value"][0], 32)
+			convert.SetConvert(params["convert_from"][0], params["convert_to"][0], value)
 			convert.GetConvert()
 			c.JSON(http.StatusOK, gin.H{
 				"convert_from":    convert.CurrencyFrom,
