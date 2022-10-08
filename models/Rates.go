@@ -1,8 +1,7 @@
 package models
 
-//"fmt"
-
 type Rates struct {
+	Request  Request
 	Ticker   Ticker
 	Currency string
 	Sell     float64
@@ -30,8 +29,6 @@ func (r *Rates) CheckRatesParams(params map[string][]string) bool {
 func (r *Rates) GetRates(params map[string][]string) map[string]float64 {
 	r.Ticker.SetTicker()
 	if len(params) > 1 {
-		//return make(map[string]BitcoinPrice{params["currency"][0], r.Ticker.BitcoinPriceList[params["currency"][0]]})
-		//return make([1]BitcoinPrice{params["currency"][0], r.Ticker.BitcoinPriceList[] })
 		fiatCurrency := make(map[string]float64)
 		fiatCurrency[params["currency"][0]] = r.Ticker.BitcoinPriceList[params["currency"][0]]
 		return fiatCurrency

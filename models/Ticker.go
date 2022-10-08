@@ -15,7 +15,6 @@ const (
 var ()
 
 type BitcoinPrice struct {
-	//currency string  `json:"price"`
 	price float64 `json:"price"`
 }
 
@@ -40,10 +39,8 @@ func (ticker *Ticker) SetTicker() {
 	for key, value := range ticker.Data {
 		sell := fmt.Sprintf("%v", value["sell"])
 		sellf, _ := strconv.ParseFloat(sell, 32)
-		//btcPrice := BitcoinPrice{price: sellf}
 		btcPrice := sellf
 		ticker.BitcoinPriceList[string(key)] = btcPrice
-		//fmt.Println(string(key), " ", ticker.BitcoinPriceList[string(key)])
 	}
 
 }

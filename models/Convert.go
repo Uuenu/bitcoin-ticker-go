@@ -1,5 +1,7 @@
 package models
 
+import "github.com/gin-gonic/gin"
+
 type Convert struct {
 	Request        Request
 	Ticker         Ticker
@@ -60,4 +62,14 @@ func (c *Convert) GetConvert() {
 		}
 	}
 
+}
+
+func (c *Convert) ResultJSON() gin.H {
+	return gin.H{
+		"convert from":    c.CurrencyFrom,
+		"convert to":      c.CurrencyTo,
+		"value":           c.Value,
+		"converted value": c.ConvertedValue,
+		"rate":            c.Rate,
+	}
 }

@@ -1,8 +1,6 @@
 package main
 
 import (
-	//"encoding/json"
-
 	"net/http"
 	"strconv"
 
@@ -21,9 +19,7 @@ func getMethods(c *gin.Context) {
 		if rates.CheckRatesParams(params) {
 			c.JSON(http.StatusOK, rates.GetRates(params))
 		} else {
-			c.JSON(http.StatusOK, gin.H{
-				"response": "Incorrect params",
-			})
+			c.JSON(http.StatusOK, rates.Request.ErorrJSON())
 		}
 	}
 }
@@ -34,20 +30,12 @@ func postMethods(c *gin.Context) {
 		params := c.Request.URL.Query()
 		var convert models.Convert
 		if !convert.CheckConvertParams(params) {
-			c.JSON(http.StatusOK, gin.H{
-				"response": "Incorrect params",
-			})
+			c.JSON(http.StatusOK, convert.Request.ErorrJSON())
 		} else {
 			value, _ := strconv.ParseFloat(params["value"][0], 32)
 			convert.SetConvert(params["convert_from"][0], params["convert_to"][0], value)
 			convert.GetConvert()
-			c.JSON(http.StatusOK, gin.H{
-				"convert_from":    convert.CurrencyFrom,
-				"convert_to":      convert.CurrencyTo,
-				"value":           convert.Value,
-				"converted_value": convert.ConvertedValue,
-				"rate":            convert.Rate,
-			})
+			c.JSON(http.StatusOK, convert.ResultJSON())
 		}
 
 	}
@@ -65,5 +53,5 @@ func main() {
 
 	}
 
-	router.Run(":3000") // listen and serve on 0.0.0.0:8080
+	router.Run(":3000") // listen and serve on 0.0.0.0:3000
 }
