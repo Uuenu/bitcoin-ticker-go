@@ -12,8 +12,6 @@ const (
 	FEE        = 0.02
 )
 
-var ()
-
 type BitcoinPrice struct {
 	price float64 `json:"price"`
 }
