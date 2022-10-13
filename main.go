@@ -10,6 +10,7 @@ func main() {
 	router := gin.Default()
 
 	api := router.Group("/api")
+	api.Use(routes.Middleware)
 	api.Use()
 	{
 		api.GET("/v1", routes.Rates)
