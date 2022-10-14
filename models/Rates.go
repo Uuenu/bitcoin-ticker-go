@@ -7,7 +7,7 @@ type Rates struct {
 	Sell     float64
 }
 
-func (r *Rates) CheckRatesParams(params map[string][]string) bool {
+func (r *Rates) CheckParams(params map[string][]string) bool {
 	if len(params) > 2 {
 		return false
 	}
@@ -26,7 +26,7 @@ func (r *Rates) CheckRatesParams(params map[string][]string) bool {
 	return true
 }
 
-func (r *Rates) GetRates(params map[string][]string) map[string]float64 {
+func (r *Rates) GetResult(params map[string][]string) map[string]float64 {
 	r.Ticker.SetTicker()
 	if len(params) > 1 {
 		fiatCurrency := make(map[string]float64)
@@ -36,3 +36,5 @@ func (r *Rates) GetRates(params map[string][]string) map[string]float64 {
 		return r.Ticker.BitcoinPriceList
 	}
 }
+
+func (r *Rates) SetData() {}

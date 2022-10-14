@@ -16,7 +16,7 @@ type Convert struct {
 	Rate           float64
 }
 
-func (c *Convert) CheckConvertParams(params map[string][]string) bool {
+func (c *Convert) CheckParams(params map[string][]string) bool {
 
 	fmt.Print("params len", len(params))
 
@@ -45,13 +45,13 @@ func (c *Convert) CheckConvertParams(params map[string][]string) bool {
 
 }
 
-func (c *Convert) SetConvert(currency_from, currency_to string, value float64) {
+func (c *Convert) SetData(currency_from, currency_to string, value float64) {
 	c.CurrencyFrom = currency_from
 	c.CurrencyTo = currency_to
 	c.Value = value
 }
 
-func (c *Convert) GetConvert() {
+func (c *Convert) GetResult() {
 	c.Ticker.SetTicker()
 
 	switch c.CurrencyFrom {

@@ -22,8 +22,8 @@ func Rates(c *gin.Context) {
 		case "rates":
 			params := c.Request.URL.Query()
 			var rates models.Rates
-			if rates.CheckRatesParams(params) {
-				c.JSON(http.StatusOK, rates.GetRates(params))
+			if rates.CheckParams(params) {
+				c.JSON(http.StatusOK, rates.GetResult(params))
 			} else {
 				c.JSON(http.StatusOK, rates.Request.ErorrJSON())
 			}
@@ -31,7 +31,7 @@ func Rates(c *gin.Context) {
 			var getToken models.GetToken
 			getToken.Token = utils.GnrBearerTkn()
 			params := c.Request.URL.Query()
-			getToken.CheckTokenParams(params)
+			getToken.CheckParams(params)
 			c.JSON(http.StatusOK, gin.H{
 				"Token": getToken.Token,
 			})

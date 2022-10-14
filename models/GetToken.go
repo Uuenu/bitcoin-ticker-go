@@ -5,6 +5,6 @@ type GetToken struct {
 	Token      string
 }
 
-func (r *GetToken) CheckTokenParams(params map[string][]string) bool {
+func (r *GetToken) CheckParams(params map[string][]string) bool {
 	return len(params) == 1
 }
