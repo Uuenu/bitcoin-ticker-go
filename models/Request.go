@@ -4,6 +4,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type BaseRequester interface {
+	ErorrJSON() gin.H
+	AuthStatus() bool
+	AuthErorrJSON() gin.H
+}
+
 type Request struct {
 }
 

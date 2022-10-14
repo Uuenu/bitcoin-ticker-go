@@ -1,10 +1,8 @@
 package routes
 
 import (
-	"fmt"
 	"gin-ticker/models"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,13 +23,11 @@ func Convert(c *gin.Context) {
 			if !convert.CheckParams(params) {
 				c.JSON(http.StatusOK, convert.Request.ErorrJSON())
 			} else {
-				value, _ := strconv.ParseFloat(params["value"][0], 32)
-				convert.SetData(params["convert_from"][0], params["convert_to"][0], value)
+				convert.SetData(params)
 				convert.GetResult()
 				c.JSON(http.StatusOK, convert.ResultJSON())
 			}
 		case "profit":
-			fmt.Println("Hello")
 			var profit models.Profit
 			if !profit.CheckParams(params) {
 				c.JSON(http.StatusOK, profit.Request.ErorrJSON())

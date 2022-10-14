@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -45,10 +46,12 @@ func (c *Convert) CheckParams(params map[string][]string) bool {
 
 }
 
-func (c *Convert) SetData(currency_from, currency_to string, value float64) {
-	c.CurrencyFrom = currency_from
-	c.CurrencyTo = currency_to
-	c.Value = value
+func (c *Convert) SetData(params map[string][]string) {
+
+	c.CurrencyFrom = params["convert_from"][0]
+	c.CurrencyTo = params["convert_to"][0]
+	c.Value, _ = strconv.ParseFloat(params["value"][0], 64)
+
 }
 
 func (c *Convert) GetResult() {

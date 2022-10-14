@@ -23,7 +23,7 @@ func Rates(c *gin.Context) {
 			params := c.Request.URL.Query()
 			var rates models.Rates
 			if rates.CheckParams(params) {
-				c.JSON(http.StatusOK, rates.GetResult(params))
+				c.JSON(http.StatusOK, rates.ResultJSON())
 			} else {
 				c.JSON(http.StatusOK, rates.Request.ErorrJSON())
 			}

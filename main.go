@@ -14,9 +14,9 @@ func main() {
 	api.Use(auth.Middleware)
 	api.Use()
 	{
-		api.GET("/v1", routes.Rates)
+		api.GET("/v1", routes.Method)
 
-		api.POST("/v1", routes.Convert)
+		api.POST("/v1", routes.Method)
 
 	}
 
