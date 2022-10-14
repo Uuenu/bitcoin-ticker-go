@@ -24,3 +24,7 @@ func (r *Request) AuthStatus(authStatus bool) bool {
 func (r *Request) AuthErorrJSON() gin.H {
 	return gin.H{"response": "Authorization Erorr"}
 }
+
+func (r *Request) UndefinedMethod() gin.H {
+	return gin.H{"Response": "Undefined Method"}
+}

@@ -43,6 +43,9 @@ func Method(c *gin.Context) {
 		case "rates":
 			var rates models.Rates
 			Response(c, &rates)
+		default:
+			var request models.Request
+			c.JSON(http.StatusOK, request.UndefinedMethod())
 		}
 
 	}
