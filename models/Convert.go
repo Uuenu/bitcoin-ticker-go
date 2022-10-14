@@ -1,6 +1,10 @@
 package models
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+
+	"github.com/gin-gonic/gin"
+)
 
 type Convert struct {
 	Request        Request
@@ -13,6 +17,8 @@ type Convert struct {
 }
 
 func (c *Convert) CheckConvertParams(params map[string][]string) bool {
+
+	fmt.Print("params len", len(params))
 
 	if len(params) != 4 {
 		return false

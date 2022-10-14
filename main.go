@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gin-ticker/auth"
 	"gin-ticker/routes"
 
 	"github.com/gin-gonic/gin"
@@ -10,7 +11,7 @@ func main() {
 	router := gin.Default()
 
 	api := router.Group("/api")
-	api.Use(routes.Middleware)
+	api.Use(auth.Middleware)
 	api.Use()
 	{
 		api.GET("/v1", routes.Rates)
