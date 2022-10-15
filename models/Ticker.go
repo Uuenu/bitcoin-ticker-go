@@ -12,10 +12,6 @@ const (
 	FEE        = 0.02
 )
 
-type BitcoinPrice struct {
-	price float64 `json:"price"`
-}
-
 type Ticker struct {
 	Data             map[string]map[string]interface{}
 	BitcoinPriceList map[string]float64

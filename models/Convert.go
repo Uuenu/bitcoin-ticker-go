@@ -59,17 +59,11 @@ func (c *Convert) GetResult() {
 
 	switch c.CurrencyFrom {
 	case "BTC":
-		{
-			c.ConvertedValue = c.Value*c.Ticker.BitcoinPriceList[c.CurrencyTo] - FEE*(c.Value*c.Ticker.BitcoinPriceList[c.CurrencyTo])
-			c.Rate = 1
-		}
-
+		c.ConvertedValue = c.Value*c.Ticker.BitcoinPriceList[c.CurrencyTo] - FEE*(c.Value*c.Ticker.BitcoinPriceList[c.CurrencyTo])
 	default:
-		{
-			c.ConvertedValue = c.Value/c.Ticker.BitcoinPriceList[c.CurrencyFrom] - FEE*(c.Value*c.Ticker.BitcoinPriceList[c.CurrencyTo])
-			c.Rate = 1
-		}
+		c.ConvertedValue = c.Value/c.Ticker.BitcoinPriceList[c.CurrencyFrom] - FEE*(c.Value*c.Ticker.BitcoinPriceList[c.CurrencyTo])
 	}
+	c.Rate = c.Ticker.BitcoinPriceList[c.CurrencyFrom]
 
 }
 
